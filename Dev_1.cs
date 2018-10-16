@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dev_1
 {
@@ -12,30 +9,35 @@ namespace Dev_1
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("No arguments");
+                Console.WriteLine("No arguments"); // checking if there is no arguments 
                 return 0;
             }
 
-            string maximumSequenceOfelements = String.Empty;
-            string currentSequenceOfelements = String.Empty;
+            string initialLineOfElements = String.Empty; 
+            for (int  i = 0; i < args.Length; ++i)
+            {
+                initialLineOfElements += args[i]; // if there more then one argument - sum all the arguments into one string
+            }
+            string maximumSequenceOfElements = String.Empty;
+            string currentSequenceOfElements = String.Empty;
 
             try
             {
-                for (int i = 0; i < args[0].Length; ++i)
+                for (int i = 0; i < initialLineOfElements.Length; ++i)
                 {
-                    for (int j = i; j < args[0].Length; ++j)
+                    for (int j = i; j < initialLineOfElements.Length; ++j)
                     {
-                        if (!currentSequenceOfelements.Contains(args[0][j]))
+                        if (!currentSequenceOfElements.Contains(initialLineOfElements[j])) 
                         {
-                            currentSequenceOfelements += args[0][j];
+                            currentSequenceOfElements += initialLineOfElements[j]; 
                         }
                         else
                         {
-                            if (maximumSequenceOfelements.Length < currentSequenceOfelements.Length)
+                            if (maximumSequenceOfElements.Length < currentSequenceOfElements.Length)
                             {
-                                maximumSequenceOfelements = currentSequenceOfelements;
+                                maximumSequenceOfElements = currentSequenceOfElements;
                             }
-                            currentSequenceOfelements = String.Empty;
+                            currentSequenceOfElements = String.Empty;
                             break;
 
                         }
@@ -43,9 +45,10 @@ namespace Dev_1
                 }
             } catch (Exception e )
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message); // if there is a exception  - just break the program
+                return 0;
             }
-            Console.WriteLine(maximumSequenceOfelements);
+            Console.WriteLine("Maximum sequence of not unique elements : " + maximumSequenceOfElements.Length);
             return 0;
         }
     }
