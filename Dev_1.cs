@@ -18,6 +18,7 @@ namespace Dev_1
             {
                 initialLineOfElements += args[i]; // if there more then one argument - sum all the arguments into one string
             }
+
             string maximumSequenceOfElements = String.Empty;
             string currentSequenceOfElements = String.Empty;
 
@@ -48,6 +49,7 @@ namespace Dev_1
                 Console.WriteLine(e.Message); // if there is a exception  - just break the program
                 return 0;
             }
+
             Console.WriteLine("Maximum sequence of not unique elements : " + maximumSequenceOfElements.Length);
             return 0;
         }
