@@ -15,14 +15,17 @@ namespace Dev_1
             string initialLineOfElements = String.Empty; 
             for (int  i = 0; i < args.Length; ++i)
             {
-                initialLineOfElements += " ";
                 initialLineOfElements += args[i]; // if there more then one argument - sum all the arguments into one string
+                if (!(i == args.Length - 1))
+                {
+                    initialLineOfElements += " ";
+                }
             }
 
             int lenghtOfSubSequence = initialLineOfElements.SearchMaximumLenghtOfUniqueSequence();
             if (!(lenghtOfSubSequence == 0))
             {
-                Console.WriteLine("Maximum sequence of not unique elements : " + lenghtOfSubSequence);
+                Console.WriteLine(lenghtOfSubSequence);
             }
 
             return 0;
