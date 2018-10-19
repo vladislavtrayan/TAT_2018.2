@@ -19,13 +19,13 @@ namespace Dev_1
             }
 
             StringBuilder initialLineOfElements = new StringBuilder(); 
-            for (int  i = 0; i < args.Length; ++i)
+            for (int  i = 0; i < args.Length; i++)
             {
                 initialLineOfElements.Append(args[i]); // if there more then one argument - sum all the arguments into one string
             }
 
             LenghtOfMaxSubsequence classObject = new LenghtOfMaxSubsequence(initialLineOfElements);
-            Console.WriteLine(classObject.SearchMaximumLenghtOfUniqueSequence());
+            Console.WriteLine(classObject.GetMaximumLenghtOfUniqueSequence());
             return 0;
         }
     }
