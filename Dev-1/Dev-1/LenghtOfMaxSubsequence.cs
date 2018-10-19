@@ -13,7 +13,7 @@ namespace Dev_1
         private StringBuilder initialLineOfElements = new StringBuilder();
         public LenghtOfMaxSubsequence() {}
         public LenghtOfMaxSubsequence(StringBuilder initial) { initialLineOfElements = initial; }
-        public  int SearchMaximumLenghtOfUniqueSequence()
+        public  int GetMaximumLenghtOfUniqueSequence()
         {
             /// <summary>
             /// Method counts the maximum number of unique elements 
@@ -27,9 +27,9 @@ namespace Dev_1
 
             try
             {
-                for (int i = 0; i < initialLineOfElements.Length; ++i)
+                for (int i = 0; i < initialLineOfElements.Length; i++)
                 {
-                    for (int j = i; j < initialLineOfElements.Length; ++j)
+                    for (int j = i; j < initialLineOfElements.Length; j++)
                     {
                         if (!(currentSequenceOfElements.ToString()).Contains(initialLineOfElements[j]))
                         {
