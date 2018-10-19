@@ -31,7 +31,7 @@ namespace Dev_1
                 {
                     for (int j = i; j < initialLineOfElements.Length; j++)
                     {
-                        if (!(currentSequenceOfElements.ToString()).Contains(initialLineOfElements[j]))
+                        if (!(currentSequenceOfElements.ToString().Contains(initialLineOfElements[j])))
                         {
                             currentSequenceOfElements.Append(initialLineOfElements[j]);
                         }
