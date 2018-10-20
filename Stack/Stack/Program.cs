@@ -10,17 +10,17 @@ namespace Stack
     {
         static void Main(string[] args)
         {
-            Stack defaultStack = new Stack();
-            defaultStack.Push(1);
-            defaultStack.Push(3);
-            defaultStack.Resize(5);
-            int[] initialArray = new int[] { 1,2,3,68,24,13};
-            Stack newStackDefault = new Stack(4);
-            Stack newStackRef = new Stack(initialArray);
-            defaultStack.Pop();
-            newStackRef.Pop();
-            newStackRef.Push(11);
-            newStackRef.GetHead();
+            try
+            {
+                String[] initialArray = new String[] { "a", "b", "c", "da","wr", "k" };
+                Stack<String> InitialStack = new Stack<String>(initialArray);
+                InitialStack.Pop();
+                InitialStack.GetHead();
+                InitialStack.Push("hello");
+            }catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+            }
         }
     }
 }
