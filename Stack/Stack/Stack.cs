@@ -2,14 +2,14 @@
 
 namespace Stack
 {
-    class Stack
+    class Stack <T>
     {
         /// <summary>
         /// 
         /// </summary>
         private int maxSize ;
         private int currentSize;
-        private int[] intArray;
+        private T[] intArray;
         /// <summary>
         /// The class constructor
         /// </summary>
@@ -17,7 +17,7 @@ namespace Stack
         {
             maxSize = new int();
             currentSize = new int();
-            intArray = new int[maxSize];
+            intArray = new T[maxSize];
         }
         /// <summary>
         /// The class constructor
@@ -29,19 +29,19 @@ namespace Stack
             currentSize = new int();
             maxSize = size;
             currentSize = size;
-            intArray = new int[maxSize];
+            intArray = new T[maxSize];
         }
         /// <summary>
         /// The class constructor 
         /// </summary>
         /// <param name="initialArray"></param>
-        public Stack(int[] initialArray)
+        public Stack(T[] initialArray)
         {
             maxSize = new int();
             currentSize = new int();
             maxSize = initialArray.Length;
             currentSize = 0;
-            intArray = new int[maxSize];
+            intArray = new T[maxSize];
             for (int i = 0; i < initialArray.Length;i++)
             {
                 currentSize++;
@@ -58,8 +58,8 @@ namespace Stack
             int counter = new int();
             counter = 0;
 
-            int[] temporaryArray = new int[maxSize];
-            foreach (int i in intArray)
+            T[] temporaryArray = new T[maxSize];
+            foreach (T i in intArray)
             {
                 temporaryArray[counter] = i;
                 counter++;
@@ -70,11 +70,11 @@ namespace Stack
         /// Remove the first element from stack
         /// </summary>
         /// <returns>Retrun <int> the first elemnt of stack</returns>
-        public int Pop ()
+        public T Pop ()
         {
             try
                 {
-                int headElement = new int();
+                T headElement ;
                 headElement = intArray[0];
                 for (int i = 0; i < maxSize - 1; i++)
                 {
@@ -93,7 +93,7 @@ namespace Stack
         /// Push new element to stack
         /// </summary>
         /// <param name="newElement"></param>
-        public void Push (int newElement)
+        public void Push (T newElement)
         {
             try
             {
@@ -116,9 +116,9 @@ namespace Stack
         /// Return the head element of stack
         /// </summary>
         /// <returns>Return <int> the head element of stack </returns>
-        public int GetHead ()
+        public T GetHead ()
         {
-            int headElement = new int();
+            T headElement ;
             try
             {
                 headElement = intArray[0];
