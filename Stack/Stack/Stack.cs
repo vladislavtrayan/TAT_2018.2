@@ -5,7 +5,7 @@ namespace Stack
     class Stack <T>
     {
         /// <summary>
-        /// 
+        /// This class use array <T> as a stack
         /// </summary>
         private int maxSize ;
         private int currentSize;
