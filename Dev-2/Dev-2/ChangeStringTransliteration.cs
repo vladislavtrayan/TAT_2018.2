@@ -104,7 +104,7 @@ namespace Dev_2
             StringBuilder temporaryString = new StringBuilder();
             temporaryString.Append(str);
 
-            Dictionary<String, String> CyrillicTransliterations = new Dictionary<String, String>
+            Dictionary<String, String> cyrillicTransliterations = new Dictionary<String, String>
             {
                 ["а"] = "a",
                 ["б"] = "b",
@@ -141,9 +141,9 @@ namespace Dev_2
                 ["я"] = "ya"
             };
 
-            foreach (string i in CyrillicTransliterations.Keys)
+            foreach (string i in cyrillicTransliterations.Keys)
             {
-                temporaryString.Replace(i, CyrillicTransliterations[i]);
+                temporaryString.Replace(i, cyrillicTransliterations[i]);
             }
             str = temporaryString.ToString();
 
@@ -157,7 +157,7 @@ namespace Dev_2
             StringBuilder temporaryString = new StringBuilder();
             temporaryString.Append(str);
 
-            Dictionary<String, String> LatinTransliterations = new Dictionary<String, String>
+            Dictionary<String, String> latinTransliterations = new Dictionary<String, String>
             {
                 ["sch"] = "щ",
                 ["sh"] = "ш",
@@ -194,9 +194,9 @@ namespace Dev_2
                 ["z"] = "з"
             };
 
-            foreach (string i in LatinTransliterations.Keys)
+            foreach (string i in latinTransliterations.Keys)
             {
-                temporaryString.Replace(i, LatinTransliterations[i]);
+                temporaryString.Replace(i, latinTransliterations[i]);
             }
             str = temporaryString.ToString();
         }
