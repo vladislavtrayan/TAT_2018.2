@@ -99,7 +99,7 @@ namespace Stack
             {
                 if (currentSize >= maxSize)
                 {
-                    Resize(maxSize + 1);
+                    Resize(maxSize * 2);
                 }
                 for (int i = maxSize - 1; i > 0; i--)
                 {
