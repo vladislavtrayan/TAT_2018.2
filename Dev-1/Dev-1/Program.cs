@@ -17,16 +17,21 @@ namespace Dev_1
                 Console.WriteLine("No arguments"); // checking if there is no arguments 
                 return 0;
             }
-
-            StringBuilder initialLineOfElements = new StringBuilder(); 
-            for (int  i = 0; i < args.Length; i++)
+            try
             {
-                initialLineOfElements.Append(args[i]).Append(" ");   // if there more then one argument - sum all the arguments into one string
-            }
+                StringBuilder initialLineOfElements = new StringBuilder();
+                for (int i = 0; i < args.Length; i++)
+                {
+                    initialLineOfElements.Append(args[i]).Append(" ");   // if there more then one argument - sum all the arguments into one string
+                }
 
-            LenghtOfMaxSubsequence classObject = new LenghtOfMaxSubsequence(initialLineOfElements);
-            Console.WriteLine(classObject.GetMaximumLenghtOfUniqueSequence());
-            return 0;
+                LenghtOfMaxSubsequence classObject = new LenghtOfMaxSubsequence(initialLineOfElements);
+                Console.WriteLine(classObject.GetMaximumLenghtOfUniqueSequence());
+                return 0;
+            } catch 
+            {
+                return 0;
+            }
         }
     }
 }
