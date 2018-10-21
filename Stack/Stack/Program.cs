@@ -8,10 +8,15 @@ namespace Stack
 {
     class Program
     {
+        /// <summary>
+        /// Start point of program
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             try
             {
+                // example of using class Stack<String>
                 String[] initialArray = new String[] { "a", "b", "c", "da","wr", "k" };
                 Stack<String> InitialStack = new Stack<String>(initialArray);
                 InitialStack.Pop();
