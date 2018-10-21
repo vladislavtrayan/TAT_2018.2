@@ -49,10 +49,9 @@ namespace Dev_1
                     }
                 }
             }
-            catch (Exception e)
+            catch 
             {
-                Console.WriteLine(e.Message);
-                return 0;
+                throw new Exception();
             }
 
             return maximumSequenceOfElements.Length;
