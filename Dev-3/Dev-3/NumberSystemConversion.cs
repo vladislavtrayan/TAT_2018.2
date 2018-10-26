@@ -9,6 +9,7 @@ namespace Dev_3
     /// </summary>
     class NumberSystemConversion
     {
+        static Dictionary<int, string> dictionary;
         /// <summary>
         /// property for NewSystemBase 
         /// </summary>
@@ -20,6 +21,30 @@ namespace Dev_3
         public NumberSystemConversion (int newBase)
         {
             NewSystemBase = newBase;
+            Dictionary<int, string> tempdictionary = new Dictionary<int, string>
+            {
+                [0] = "0",
+                [1] = "1",
+                [2] = "2",
+                [3] = "3",
+                [4] = "4",
+                [5] = "5",
+                [6] = "6",
+                [7] = "7",
+                [8] = "8",
+                [9] = "9",
+                [10] = "A",
+                [11] = "B",
+                [12] = "C",
+                [13] = "D",
+                [14] = "E",
+                [15] = "F",
+                [16] = "G",
+                [17] = "H",
+                [18] = "I",
+                [19] = "J"
+            };
+            dictionary = tempdictionary;
         }
         /// <summary>
         /// convert param to new number system according to base of class object
@@ -62,29 +87,6 @@ namespace Dev_3
         /// <returns>return the string value of number</returns>
         public string IntToString (int number)
         {
-            Dictionary<int, string> dictionary = new Dictionary<int, string>
-            {
-                [0] = "0",
-                [1] = "1",
-                [2] = "2",
-                [3] = "3",
-                [4] = "4",
-                [5] = "5",
-                [6] = "6",
-                [7] = "7",
-                [8] = "8",
-                [9] = "9",
-                [10] = "A",
-                [11] = "B",
-                [12] = "C",
-                [13] = "D",
-                [14] = "E",
-                [15] = "F",
-                [16] = "G",
-                [17] = "H",
-                [18] = "I",
-                [19] = "J"
-            };
             return dictionary[number];
         }
     }
