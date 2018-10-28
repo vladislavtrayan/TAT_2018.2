@@ -8,23 +8,31 @@ namespace Dev_4
 {
     class Node
     {
-        public int Index { get; set; }
+        public bool Flag { get; set; }
+        public int Depth { get; set; }
         public string Name { get; set; }
         public string information { get; set; }
-        List<string> additionalProperties;
+        Dictionary<string,string> additionalProperties;
         List<Node> includedList;
         public Node ()
         {
-            additionalProperties = new List<string>();
+            additionalProperties = new Dictionary<string, string>();
             includedList = new List<Node>();
         }
-        public void AddProperties (string line)
+        public void AddProperties (string property,string value)
         {
-            additionalProperties.Add(line);
+            additionalProperties.Add(property, value);
         }
         public void AddNewIncludedList (Node node)
         {
             includedList.Add(node);
+        }
+        public void AddNewIncludedList(List<Node> newList)
+        {
+            includedList.AddRange(newList);
+        }
+        public void OutPut ()
+        {
         }
     }
 }

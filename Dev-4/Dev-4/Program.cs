@@ -20,7 +20,7 @@ namespace Dev_4
                 XmlToStringConvertor xmlToStringConvertor = new XmlToStringConvertor();
                 text = xmlToStringConvertor.ReadXmlFile(args[0]);
                 XmlParser xmlParser = new XmlParser();
-                xmlParser.RestructString(text);
+                xmlParser.ParseXml(text);
                 Console.WriteLine(text);
             }
             catch (Exception e)

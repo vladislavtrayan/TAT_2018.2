@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dev_4
 {
     class XmlParser
     {
-        Node rootNode = new Node();
-        Dictionary<int,Node> rootList = new Dictionary<int, Node>();
-        List<string> tagNames = new List<string>();
+        private Node rootNode;
+        private Dictionary<int,Node> rootList;
+        private List<string> tagNames;
+        public XmlParser ()
+        {
+            rootNode = new Node();
+            rootList = new Dictionary<int, Node>();
+            tagNames = new List<string>();
+        }
 
         public Node ParseXml(string text)
         {
@@ -24,62 +27,66 @@ namespace Dev_4
                 splitedText = newText.Split('@');
                 for (int i = 0; i < splitedText.Length; i++)
                 {
-                    if (ReadAttribute(splitedText[i]) && !EndFlag(splitedText[i]))
+                    if (ReadAttribute(splitedText[i]))
                     {
                         tagNames.Add(splitedText[i]);
                     }
                 }
-                int counter = 0;
 
+                int counter = 0;
                 foreach (string i in tagNames)
                 {
+                    string complexName = string.Empty;
                     Node temporaryNode = new Node();
-                    i.Replace("<", "");
-                    i.Replace(">", "");
-                    string[] splitedAttribute = i.Split(' ');
+                    complexName = i.Replace("<", "");
+                    complexName = complexName.Replace(">", "");
+                    string[] splitedAttribute = complexName.Split(' ');
                     temporaryNode.Name = splitedAttribute[0];
                     if (splitedAttribute.Length > 1)
                     {
                         for (int j = 1; j < splitedAttribute.Length; j++)
                         {
-                            temporaryNode.AddProperties(splitedAttribute[j]);
+                            string [] splitedProperty = splitedAttribute[j].Split('=');
+                            temporaryNode.AddProperties(splitedProperty[0], splitedProperty[1]);
                         }
                     }
+                    if (EndFlag(i))
+                    {
+                        temporaryNode.Flag = true;
+                    }
                     rootList.Add(counter,temporaryNode);
+                    counter++;
                 }
-                for (int i = 0; i < splitedText.Length; i++)
+                AddInfoFromText(ref splitedText);
+                int maxDepth = FindMaxDepth();
+                int executedElementPosition = new int();
+                for (int j = maxDepth; j > 0; j--)
                 {
-                    if (splitedText[i].Length > 2 &&
-                        tagNames.IndexOf(splitedText[i]) == -1 &&
-                        !EndFlag(splitedText[i]))
+                    executedElementPosition = 0;
+                    for (int i = 0; i < rootList.Count;i++)
                     {
-                        int indexInRootList;
-                        indexInRootList = tagNames.IndexOf(splitedText[i - 1]);
-                        Node temporaryNode = rootList[indexInRootList];
-                        temporaryNode.information = splitedText[i];
-                        rootList.Remove(indexInRootList);
-                        rootList.Add(indexInRootList,temporaryNode);
+                        if (rootList[i].Flag == true)
+                        {
+                            continue;
+                        }
+                        if (rootList[i].Depth + 1 == maxDepth && 
+                            rootList[i+1].Depth == maxDepth )
+                        {
+                            executedElementPosition = i;
+                            continue;
+                        }
+                        if (rootList[i].Depth == maxDepth)
+                        {
+                            rootList[executedElementPosition].AddNewIncludedList(rootList[i]);
+                        }
                     }
-                }
-                for (int i = rootList.Count; i >  0; i--)
-                {
-                    if (rootList[i].information != null)
-                    {
-                        rootList[i - 1].AddNewIncludedList(rootList[i]);
-                    }
-                }
-                for (int i = 1; i < rootList.Count;i++)
-                {
-                    if (rootList[i].information == null)
-                    {
-                        rootList[i - 1].AddNewIncludedList(rootList[i]);
-                    }
+                    maxDepth--;
                 }
                 rootNode = rootList[0];
                 return rootNode;
             }catch
             {
-                throw new Exception("((");
+                throw new Exception("Error during parsing text");
             }
         }
         public bool ReadAttribute(string text)
@@ -103,6 +110,52 @@ namespace Dev_4
             {
                 return false;
             }
+        }
+        public void AddInfoFromText (ref string[] splitedText)
+        {
+            for (int i = 0; i < splitedText.Length; i++)
+            {
+                if (splitedText[i].Length > 2 &&
+                    tagNames.IndexOf(splitedText[i]) == -1)
+                {
+                    int indexInRootList;
+                    indexInRootList = tagNames.IndexOf(splitedText[i - 1]);
+                    tagNames[indexInRootList] = string.Empty;
+                    Node temporaryNode = rootList[indexInRootList];
+                    temporaryNode.information = splitedText[i];
+                    rootList.Remove(indexInRootList);
+                    rootList.Add(indexInRootList, temporaryNode);
+                }
+            }
+        }
+        public int FindMaxDepth ()
+        {
+            int depthCounter = new int();
+            int maxDepth = new int();
+            for (int i = 0; i < rootList.Count; i++)
+            {
+                if (depthCounter > maxDepth)
+                {
+                    maxDepth = depthCounter;
+                }
+                rootList[i].Depth = depthCounter;
+                if (rootList[i].information == null)
+                {
+                    if (rootList[i].Flag == false)
+                    {
+                        depthCounter++;
+                    }
+                    else
+                    {
+                        depthCounter--;
+                    }
+                }
+                if (rootList[i].information != null)
+                {
+                    i++;
+                }
+            }
+            return maxDepth;
         }
     }
 }
