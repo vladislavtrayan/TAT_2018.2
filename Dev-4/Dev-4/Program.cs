@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dev_4
 {
+    /// <summary>
+    /// Entry point of program
+    /// get path to xml file as an argument
+    /// and parse the document to new structure
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -15,6 +16,10 @@ namespace Dev_4
                 if (args.Length == 0)
                 {
                     throw new Exception("No arguments");
+                }
+                if (args.Length > 1)
+                {
+                    throw new Exception("too many arguments");
                 }
                 string text = string.Empty;
                 XmlToStringConvertor xmlToStringConvertor = new XmlToStringConvertor();
