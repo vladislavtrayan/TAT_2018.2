@@ -1,14 +1,20 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Dev_4
 {
+    /// <summary>
+    /// convert text from xml file 
+    /// to string 
+    /// </summary>
     class XmlToStringConvertor
     {
+        /// <summary>
+        /// convert text from xml file 
+        /// returns string type value
+        /// </summary>
+        /// <param name="fileName">file name of xml file</param>
+        /// <returns>string text read from file</returns>
         public string ReadXmlFile (string fileName)
         {
             StringBuilder temporaryText = new StringBuilder();
