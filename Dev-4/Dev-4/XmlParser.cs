@@ -3,18 +3,33 @@ using System.Collections.Generic;
 
 namespace Dev_4
 {
+    /// <summary>
+    /// This class contain methods for parsing xml file
+    /// gets string text as arguments
+    /// returns object of Node type as a result
+    /// or exception ("error during parsing text")
+    /// </summary>
     class XmlParser
     {
         private Node rootNode;
         private Dictionary<int,Node> rootList;
         private List<string> tagNames;
+        /// <summary>
+        /// class constructor
+        /// </summary>
         public XmlParser ()
         {
             rootNode = new Node();
             rootList = new Dictionary<int, Node>();
             tagNames = new List<string>();
         }
-
+        /// <summary>
+        /// Parse the xml file
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>
+        /// return Node that contain all information from xml file
+        /// </returns>
         public Node ParseXml(string text)
         {
             try
@@ -89,6 +104,14 @@ namespace Dev_4
                 throw new Exception("Error during parsing text");
             }
         }
+        /// <summary>
+        /// check string if it is a tag 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>
+        /// returns true if string is a tag
+        /// returns false if not
+        /// </returns>
         public bool ReadAttribute(string text)
         {
             if (text.IndexOf("<") > -1 || text.IndexOf(">") > -1)
@@ -100,6 +123,14 @@ namespace Dev_4
                 return false;
             }
         }
+        /// <summary>
+        /// check if the string is end tag
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>
+        /// return true if string is a end tag
+        /// false if not
+        /// </returns>
         public bool EndFlag(string text)
         {
             if (text.IndexOf("</") > -1)
@@ -111,6 +142,11 @@ namespace Dev_4
                 return false;
             }
         }
+        /// <summary>
+        /// maches each tag its info
+        /// if tag doesn't contain information - field info is null
+        /// </summary>
+        /// <param name="splitedText"></param>
         public void AddInfoFromText (ref string[] splitedText)
         {
             for (int i = 0; i < splitedText.Length; i++)
@@ -128,6 +164,10 @@ namespace Dev_4
                 }
             }
         }
+        /// <summary>
+        /// matches each node its nesting depth
+        /// </summary>
+        /// <returns>returns the max depth of whole xml file</returns>
         public int FindMaxDepth ()
         {
             int depthCounter = new int();
