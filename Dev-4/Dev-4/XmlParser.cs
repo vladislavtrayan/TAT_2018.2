@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 using System.Collections.Generic;
 
 namespace Dev_4
@@ -11,17 +11,15 @@ namespace Dev_4
     /// </summary>
     class XmlParser
     {
-        private Node rootNode;
-        private Dictionary<int,Node> rootList;
-        private List<string> tagNames;
+        List<string> tagLines;
+        List<string[]> result;
         /// <summary>
         /// class constructor
         /// </summary>
         public XmlParser ()
         {
-            rootNode = new Node();
-            rootList = new Dictionary<int, Node>();
-            tagNames = new List<string>();
+            result = new List<string[]>();
+            tagLines = new List<string>();
         }
         /// <summary>
         /// Parse the xml file
@@ -30,78 +28,62 @@ namespace Dev_4
         /// <returns>
         /// return Node that contain all information from xml file
         /// </returns>
-        public Node ParseXml(string text)
+        public void ParseXml(string text)
         {
-            try
-            {
-                string newText;
-                newText = text.Replace("  ", " ");
-                newText = newText.Replace("<", "@<");
-                newText = newText.Replace(">", ">@");
-                string[] splitedText;
-                splitedText = newText.Split('@');
-                for (int i = 0; i < splitedText.Length; i++)
-                {
-                    if (ReadAttribute(splitedText[i]))
-                    {
-                        tagNames.Add(splitedText[i]);
-                    }
-                }
+            string newText;
+            newText = text.Replace("  ", " ");
+            newText = newText.Replace("<", "@<");
+            newText = newText.Replace(">", ">@");
+            string[] splitedText;
+            splitedText = newText.Split('@');
 
-                int counter = 0;
-                foreach (string i in tagNames)
-                {
-                    string complexName = string.Empty;
-                    Node temporaryNode = new Node();
-                    complexName = i.Replace("<", "");
-                    complexName = complexName.Replace(">", "");
-                    string[] splitedAttribute = complexName.Split(' ');
-                    temporaryNode.Name = splitedAttribute[0];
-                    if (splitedAttribute.Length > 1)
-                    {
-                        for (int j = 1; j < splitedAttribute.Length; j++)
-                        {
-                            string [] splitedProperty = splitedAttribute[j].Split('=');
-                            temporaryNode.AddProperties(splitedProperty[0], splitedProperty[1]);
-                        }
-                    }
-                    if (EndFlag(i))
-                    {
-                        temporaryNode.Flag = true;
-                    }
-                    rootList.Add(counter,temporaryNode);
-                    counter++;
-                }
-                AddInfoFromText(ref splitedText);
-                int maxDepth = FindMaxDepth();
-                int executedElementPosition = new int();
-                for (int j = maxDepth; j > 0; j--)
-                {
-                    executedElementPosition = 0;
-                    for (int i = 0; i < rootList.Count;i++)
-                    {
-                        if (rootList[i].Flag == true)
-                        {
-                            continue;
-                        }
-                        if (rootList[i].Depth + 1 == maxDepth && 
-                            rootList[i+1].Depth == maxDepth )
-                        {
-                            executedElementPosition = i;
-                            continue;
-                        }
-                        if (rootList[i].Depth == maxDepth)
-                        {
-                            rootList[executedElementPosition].AddNewIncludedList(rootList[i]);
-                        }
-                    }
-                    maxDepth--;
-                }
-                rootNode = rootList[0];
-                return rootNode;
-            }catch
+            ReConstructTagAttribute(ref splitedText);
+            StringBuilder temporaryStringBuilder = new StringBuilder();
+            int i = 0;
+            while (i != splitedText.Length)
             {
-                throw new Exception("Error during parsing text");
+                i = 0;
+                for (; i < splitedText.Length; i++)
+                {
+                    if (IsTrash(splitedText[i]))
+                    {
+                        continue;
+                    }
+                    if (EndFlag(splitedText[i]))
+                    {
+                        splitedText[i] = string.Empty;
+                        for (int j = i;j > 0;j--)
+                        {
+                            if (IsTag(splitedText[j]) &&
+                                !EndFlag (splitedText[j]))
+                            {
+                                splitedText[j] = string.Empty;
+                                break;
+                            }
+                        }
+                    }
+                    if (!IsTag(splitedText[i + 1]) &&
+                        !EndFlag(splitedText[i + 1]) &&
+                        splitedText[i + 1] != string.Empty &&
+                        !IsTrash(splitedText[i + 1]))
+                    {
+                        temporaryStringBuilder.Append(splitedText[i]);
+                        temporaryStringBuilder.Append("/");
+                        temporaryStringBuilder.Append(splitedText[i + 1]);
+                        splitedText[i] = string.Empty;
+                        splitedText[i + 1] = string.Empty;
+                        splitedText[i + 2] = string.Empty;
+                        tagLines.Add(temporaryStringBuilder.ToString());
+                        temporaryStringBuilder.Clear();
+                        break;
+                    }
+                    temporaryStringBuilder.Append(splitedText[i]);
+                    temporaryStringBuilder.Append("/");
+                }
+            }
+            for (int j = 0; j < tagLines.Count;j++)
+            {
+                result.Add(tagLines[j].Split('/'));
             }
         }
         /// <summary>
@@ -112,7 +94,7 @@ namespace Dev_4
         /// returns true if string is a tag
         /// returns false if not
         /// </returns>
-        public bool ReadAttribute(string text)
+        public bool IsTag(string text)
         {
             if (text.IndexOf("<") > -1 || text.IndexOf(">") > -1)
             {
@@ -142,60 +124,41 @@ namespace Dev_4
                 return false;
             }
         }
-        /// <summary>
-        /// maches each tag its info
-        /// if tag doesn't contain information - field info is null
-        /// </summary>
-        /// <param name="splitedText"></param>
-        public void AddInfoFromText (ref string[] splitedText)
+        public bool IsTrash (string text)
         {
-            for (int i = 0; i < splitedText.Length; i++)
+            for (int i = 0; i < text.Length;i++)
             {
-                if (splitedText[i].Length > 2 &&
-                    tagNames.IndexOf(splitedText[i]) == -1)
+                if (text[i] != ' ')
                 {
-                    int indexInRootList;
-                    indexInRootList = tagNames.IndexOf(splitedText[i - 1]);
-                    tagNames[indexInRootList] = string.Empty;
-                    Node temporaryNode = rootList[indexInRootList];
-                    temporaryNode.information = splitedText[i];
-                    rootList.Remove(indexInRootList);
-                    rootList.Add(indexInRootList, temporaryNode);
+                    return false;
                 }
             }
+            return true;
         }
-        /// <summary>
-        /// matches each node its nesting depth
-        /// </summary>
-        /// <returns>returns the max depth of whole xml file</returns>
-        public int FindMaxDepth ()
+        public void ReConstructTagAttribute (ref string[] splitedText)
         {
-            int depthCounter = new int();
-            int maxDepth = new int();
-            for (int i = 0; i < rootList.Count; i++)
+            string[] splitedAttribute;
+            StringBuilder convertedTag = new StringBuilder();
+            for (int i = 0; i < splitedText.Length;i++)
             {
-                if (depthCounter > maxDepth)
+                convertedTag.Clear();
+                if (IsTag(splitedText[i]) &&
+                    !EndFlag(splitedText[i]))
                 {
-                    maxDepth = depthCounter;
-                }
-                rootList[i].Depth = depthCounter;
-                if (rootList[i].information == null)
-                {
-                    if (rootList[i].Flag == false)
+                    splitedText[i] = splitedText[i].Replace("<","");
+                    splitedText[i] = splitedText[i].Replace(">","");
+                    splitedAttribute = splitedText[i].Split(' ');
+                    convertedTag.Append("< ");
+                    convertedTag.Append(splitedAttribute[0]);
+                    convertedTag.Append("[ ");
+                    for (int j = 1; j < splitedAttribute.Length;j++)
                     {
-                        depthCounter++;
+                        convertedTag.Append(splitedAttribute[j]);
                     }
-                    else
-                    {
-                        depthCounter--;
-                    }
-                }
-                if (rootList[i].information != null)
-                {
-                    i++;
+                    convertedTag.Append(" ] >");
+                    splitedText[i] = convertedTag.ToString();
                 }
             }
-            return maxDepth;
         }
     }
 }
