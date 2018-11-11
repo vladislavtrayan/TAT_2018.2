@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Dev_4
 {
@@ -25,8 +26,10 @@ namespace Dev_4
                 XmlToStringConvertor xmlToStringConvertor = new XmlToStringConvertor();
                 text = xmlToStringConvertor.ReadXmlFile(args[0]);
                 XmlParser xmlParser = new XmlParser();
-                xmlParser.ParseXml(text);
-                Console.WriteLine(text);
+                List<string[]> result = new List<string[]>();
+                result =  xmlParser.ParseXml(text);
+                ListOutputter listOutputter = new ListOutputter();
+                listOutputter.Output(result);
             }
             catch (Exception e)
             {
