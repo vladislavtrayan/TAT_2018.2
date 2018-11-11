@@ -11,8 +11,8 @@ namespace Dev_4
     /// </summary>
     class XmlParser
     {
-        List<string> tagLines;
-        List<string[]> result;
+        private List<string[]> result;
+        private List<string> tagLines;
         /// <summary>
         /// class constructor
         /// </summary>
@@ -28,10 +28,12 @@ namespace Dev_4
         /// <returns>
         /// return Node that contain all information from xml file
         /// </returns>
-        public void ParseXml(string text)
+        public List<string[]> ParseXml(string text)
         {
             string newText;
             newText = text.Replace("  ", " ");
+            RemoveComments(ref newText);
+            RemoveXmlDeclaration(ref newText);
             newText = newText.Replace("<", "@<");
             newText = newText.Replace(">", ">@");
             string[] splitedText;
@@ -85,6 +87,7 @@ namespace Dev_4
             {
                 result.Add(tagLines[j].Split('/'));
             }
+            return result;
         }
         /// <summary>
         /// check string if it is a tag 
@@ -134,6 +137,28 @@ namespace Dev_4
                 }
             }
             return true;
+        }
+        /// <summary>
+        /// removes comments from text
+        /// </summary>
+        /// <param name="text"></param>
+        private  void RemoveComments(ref string text)
+        {
+            while (text.Contains("<!--"))
+            {
+                text = text.Remove(text.IndexOf("<!--"), text.IndexOf("-->") + 3 - text.IndexOf("<!--")).Trim();
+            }
+        }
+        /// <summary>
+        /// Removes declaration from text
+        /// </summary>
+        /// <param name="text"></param>
+        private void RemoveXmlDeclaration(ref string text)
+        {
+            while (text.Contains("<?"))
+            {
+                text = text.Remove(text.IndexOf("<?"), text.IndexOf("?>") + 2 - text.IndexOf("<?")).Trim();
+            }
         }
         public void ReConstructTagAttribute (ref string[] splitedText)
         {
