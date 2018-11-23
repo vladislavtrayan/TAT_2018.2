@@ -68,6 +68,37 @@ namespace Dev_3.Test
         }
 
         [TestMethod]
+        [DataRow(50, "110010", 2)]
+        [DataRow(50, "1212", 3)]
+        [DataRow(50, "302", 4)]
+        [DataRow(50, "200", 5)]
+        [DataRow(50, "122", 6)]
+        [DataRow(50, "101", 7)]
+        [DataRow(50, "62", 8)]
+        [DataRow(50, "55", 9)]
+        [DataRow(50, "50", 10)]
+        [DataRow(50, "46", 11)]
+        [DataRow(50, "42", 12)]
+        [DataRow(50, "3B", 13)]
+        [DataRow(50, "38", 14)]
+        [DataRow(50, "35", 15)]
+        [DataRow(50, "32", 16)]
+        [DataRow(50, "2G", 17)]
+        [DataRow(50, "2E", 18)]
+        [DataRow(50, "2C", 19)]
+        [DataRow(50, "2A", 20)]
+        public void FiftyToOtherNumberSystem(int argument, string expected, int newBase)
+        {
+            //arrange
+            string actual = string.Empty;
+            //act
+            Dev_3.NumberSystemConversion numberSystemConversion = new Dev_3.NumberSystemConversion(newBase);
+            actual = numberSystemConversion.ConvertIntToNewSystem(argument);
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         [DataRow(-1, "-1", 2)]
         [DataRow(-1, "-1", 3)]
         [DataRow(-1, "-1", 4)]
