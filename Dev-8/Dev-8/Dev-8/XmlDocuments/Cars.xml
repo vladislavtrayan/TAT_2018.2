@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Cars>  
+  <Car Brand="Mersedes">
+  <model>E30</model>
+  <quantity>100</quantity>
+  <price>5000</price>
+  </Car>  
+  <Car Brand="Volvo">
+  <model>XC90</model>
+  <quantity>250</quantity>
+  <price>15000</price>
+  </Car>  
+  <Car Brand="BMW">
+  <model>X6</model>
+  <quantity>10</quantity>
+  <price>7500</price>
+  </Car>      
+</Cars>
