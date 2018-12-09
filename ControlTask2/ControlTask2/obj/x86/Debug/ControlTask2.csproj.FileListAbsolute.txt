@@ -1,0 +1,6 @@
+/home/vlad/TAT_2018.2/ControlTask2/ControlTask2/bin/Debug/ControlTask2.exe
+/home/vlad/TAT_2018.2/ControlTask2/ControlTask2/bin/Debug/ControlTask2.pdb
+/home/vlad/TAT_2018.2/ControlTask2/ControlTask2/obj/x86/Debug/ControlTask2.csprojAssemblyReference.cache
+/home/vlad/TAT_2018.2/ControlTask2/ControlTask2/obj/x86/Debug/ControlTask2.csproj.CoreCompileInputs.cache
+/home/vlad/TAT_2018.2/ControlTask2/ControlTask2/obj/x86/Debug/ControlTask2.exe
+/home/vlad/TAT_2018.2/ControlTask2/ControlTask2/obj/x86/Debug/ControlTask2.pdb
