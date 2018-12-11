@@ -15,11 +15,15 @@ namespace VkLogin
     class VkLogin
     {
         IWebDriver driver;
+        string email;
+        string password;
 
         [SetUp]
         public void startBrowser()
         {
             driver = new ChromeDriver();
+            email = "email";
+            password = "password";
         }
 
         [Test]
@@ -50,8 +54,8 @@ namespace VkLogin
             emailTextBox.Clear();
             passWordTextBox.Clear();
 
-            emailTextBox.SendKeys("login");
-            passWordTextBox.SendKeys("password");
+            emailTextBox.SendKeys(email);
+            passWordTextBox.SendKeys(password);
             loginButton.Click();
 
             for (int i = 0;i < 100; i++)
