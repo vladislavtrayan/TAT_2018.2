@@ -2,12 +2,16 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using System.Threading;
 
 
 namespace Dev9
 {
+    /// <summary>
+    /// Log in VK
+    /// Find unread messages
+    /// OutPut them in console
+    /// </summary>
     class MainClass
     {
         public static void  Main(string[] args)
@@ -16,7 +20,7 @@ namespace Dev9
             string email;
             string password;
 
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             email = "login";
             password = "password";
 
