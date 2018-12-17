@@ -10,27 +10,23 @@ namespace Dev_1
         /// </summary>
         /// <param name="args"></param>
         
-        static int Main(string[] args)
+        static void Main(string[] args)
         {
-            if (args.Length == 0)
-            {
-                Console.WriteLine("No arguments"); // checking if there is no arguments 
-                return 0;
-            }
             try
             {
-                StringBuilder initialLineOfElements = new StringBuilder();
-                for (int i = 0; i < args.Length; i++)
+                if (args.Length == 0)
                 {
-                    initialLineOfElements.Append(args[i]).Append(" ");   // if there more then one argument - sum all the arguments into one string
+                    throw new Exception("No arguments");
                 }
 
+                StringBuilder initialLineOfElements = new StringBuilder();
                 LenghtOfMaxSubsequence classObject = new LenghtOfMaxSubsequence(initialLineOfElements);
                 Console.WriteLine(classObject.GetMaximumLenghtOfUniqueSequence());
-                return 0;
-            } catch 
+
+            } 
+            catch (Exception e)
             {
-                return 0;
+                Console.WriteLine(e.Message);
             }
         }
     }
