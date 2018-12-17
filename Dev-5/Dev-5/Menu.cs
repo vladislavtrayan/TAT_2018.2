@@ -21,20 +21,20 @@ namespace Dev_5
         /// <summary>
         /// Show menu functionality
         /// </summary>
-        public void Show ()
+        public void Show()
         {
-            Console.WriteLine("Choose command : ");
-            Console.WriteLine("1 Add new car");
-            Console.WriteLine("2 Count types");
-            Console.WriteLine("3 Count all");
-            Console.WriteLine("4 Average price");
-            Console.WriteLine("5 Average price by types");
-            Console.WriteLine("0 to exit");
+            Console.WriteLine("Enter command : ");
+            Console.WriteLine("Add_new_car");
+            Console.WriteLine("Count_types");
+            Console.WriteLine("Count_all");
+            Console.WriteLine("Average_price");
+            Console.WriteLine("Average_price Type");
+            Console.WriteLine("Exit");
         }
         /// <summary>
         /// Clear console window
         /// </summary>
-        public void Clear ()
+        public void Clear()
         {
             Console.Clear();
         }

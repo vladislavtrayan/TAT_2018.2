@@ -5,10 +5,6 @@
     /// </summary>
     interface ICommandControl
     {
-        void AddNewCar();
-        void ShowAveragePrice();
-        void ShowAveragePriceByType();
-        void ShowCapacity();
-        void ShowNumberOfTypes();
+        void Execute();
     }
 }
