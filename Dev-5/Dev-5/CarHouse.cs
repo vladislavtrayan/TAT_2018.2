@@ -77,6 +77,11 @@ namespace Dev_5
         /// </returns>
         public double GetAveragePrice ()
         {
+            if (carHouse == null)
+            {
+                throw new Exception("Car storage is empty");
+            }
+
             double averagePrice = new double();
             int capacity = 0;
             foreach (Car i in carHouse)
@@ -99,6 +104,11 @@ namespace Dev_5
         /// </returns>
         public double GetAveragePrice (string brand)
         {
+            if (carHouse == null)
+            {
+                throw new Exception("Car storage is empty");
+            }
+
             double averagePrice = new double();
             int capacity = 0;
             foreach (Car i in carHouse)
@@ -120,6 +130,11 @@ namespace Dev_5
         /// </returns>
         public int CountTypes ()
         {
+            if (carHouse == null)
+            {
+                throw new Exception("Car storage is empty");
+            }
+
             int typeCounter = 0;
             string temporaryString = string.Empty;
             foreach (Car i in carHouse)
