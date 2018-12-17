@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 
 namespace Dev_1
@@ -25,8 +24,6 @@ namespace Dev_1
             StringBuilder maximumSequenceOfElements = new StringBuilder();
             StringBuilder currentSequenceOfElements = new StringBuilder();
 
-            try
-            {
                 for (int i = 0; i < initialLineOfElements.Length; i++)
                 {
                     for (int j = i; j < initialLineOfElements.Length; j++)
@@ -48,11 +45,6 @@ namespace Dev_1
                         }
                     }
                 }
-            }
-            catch 
-            {
-                throw new Exception();
-            }
 
             return maximumSequenceOfElements.Length;
         }
