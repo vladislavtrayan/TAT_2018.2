@@ -6,7 +6,7 @@ namespace Dev_5
     /// <summary>
     /// represents a car house 
     /// </summary>
-    class CarHouse
+    public class CarHouse
     {
         private static CarHouse instance;
         private List<Car> carHouse;

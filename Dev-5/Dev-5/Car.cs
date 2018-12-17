@@ -4,7 +4,7 @@
     /// represents a cars of the same brand ,
     /// model and with a certain price
     /// </summary>
-    class Car
+    public class Car
     {
         public string Brand { get; set; }
         public string Model { get; set; }
