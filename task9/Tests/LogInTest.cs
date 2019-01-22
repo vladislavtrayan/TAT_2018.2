@@ -35,7 +35,7 @@ namespace Tests
         [Test()]
         [TestCase("molodoyVlad", "molodoyVlad")]
         [TestCase(" ", "2012022Trayan")]
-        [TestCase("molodoyVlad", "")]
+        [TestCase("molod0yVlad", "")]
         public void WrongLogin(string login, string password)
         {
             Pages.LoginPage.Login(password, login);
