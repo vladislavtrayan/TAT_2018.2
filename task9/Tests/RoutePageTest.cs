@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
-namespace task9
+using SeleniumTestFramework;
+using SeleniumTestFramework.Pages;
+
+namespace Tests
 {
     [TestFixture()]
     public class RoutePageTest
@@ -31,7 +34,7 @@ namespace task9
             Pages.RoutePage.SetTo(to);
             Pages.RoutePage.PressNext();
 
-            Assert.AreEqual(true, WarIconChecker.RedImageChecker());
+            Assert.IsTrue(WarIconChecker.IsRedImage());
         }
 
         [Test()]
@@ -44,7 +47,7 @@ namespace task9
             Pages.RoutePage.SetTo(to);
             Pages.RoutePage.PressNext();
 
-            Assert.AreEqual(false, WarIconChecker.RedImageChecker());
+            Assert.IsFalse(WarIconChecker.IsRedImage());
         }
 
         [Test()]
@@ -56,13 +59,13 @@ namespace task9
             Pages.RoutePage.SetDate(data);
             Pages.RoutePage.PressNext();
 
-            Assert.AreEqual(true, WarIconChecker.RedImageChecker());
+            Assert.IsTrue(WarIconChecker.IsRedImage());
         }
 
         [Test()]
         public void ElectronicRegistrationOnlyIsClickable()
         {
-            Assert.AreEqual(true, Pages.RoutePage.OnlyElectronicRegistration());
+            Assert.IsTrue(Pages.RoutePage.OnlyElectronicRegistration());
         }
 
         [Test()]
@@ -72,21 +75,5 @@ namespace task9
             Pages.RoutePage.PressBreak();
             Assert.AreEqual("", Pages.RoutePage.GetFrom());
         }
-
-        //
-        // Useless Test , we can not be sure that our train is exist
-        //
-        /*
-        [Test()]
-        [TestCase(0,23)]
-        [TestCase(0,0)]
-        [TestCase(0,3)]
-        public void ChooseTimeInTimeLine(int time1 , int time2)
-        {
-            Pages.RoutePage.ChooseTime(time1,time2);
-            Pages.RoutePage.PressNext();
-
-        }
-        */
     }
 }

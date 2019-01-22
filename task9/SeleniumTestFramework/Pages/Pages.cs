@@ -1,8 +1,13 @@
-﻿using System;
-namespace task9
+﻿namespace SeleniumTestFramework.Pages
 {
+    /// <summary>
+    /// Operates with page objects
+    /// </summary>
     public static class Pages
     {
+        /// <summary>
+        /// return Login page
+        /// </summary>
         public static LoginPage LoginPage
         {
             get 
@@ -11,6 +16,9 @@ namespace task9
                 return loginPage; 
             }
         }
+        /// <summary>
+        /// return Route page
+        /// </summary>
         public static RoutePage RoutePage
         {
             get
@@ -19,6 +27,9 @@ namespace task9
                 return routePage;
             }
         }
+        /// <summary>
+        /// return wait box page
+        /// </summary>
         public static WaitBox WaitBox
         {
             get
@@ -27,6 +38,9 @@ namespace task9
                 return waitBox;
             }
         }
+        /// <summary>
+        /// return check box page
+        /// </summary>
         public static CheckBox CheckBox
         {
             get

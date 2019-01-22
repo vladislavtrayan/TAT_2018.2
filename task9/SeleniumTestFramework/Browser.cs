@@ -1,23 +1,25 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace task9
+namespace SeleniumTestFramework
 {
+    /// <summary>
+    /// Operates with driver
+    /// </summary>
     public class Browser
     {
-        public Browser()
-        {
-        }
         public static IWebDriver Driver { get; set; }
         public static bool Initialised { get; set; }
 
+        /// <summary>
+        /// Initialise Driver
+        /// </summary>
         public static void Initialise ()
         {
-            Driver = new FirefoxDriver("/home/vladislav/Projects/task9/task9");
+            Driver = new ChromeDriver();
             Initialised = true;
-         }
+        }
+
         public static void Quit ()
         {
             Driver.Quit();

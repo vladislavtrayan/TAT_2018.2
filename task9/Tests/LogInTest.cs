@@ -1,6 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
-namespace task9
+using SeleniumTestFramework;
+using SeleniumTestFramework.Pages;
+
+namespace Tests
 {
     [TestFixture()]
     public class LoginTest
@@ -25,19 +28,19 @@ namespace task9
         {
             Pages.LoginPage.Login(password,login);
 
-            Assert.AreEqual(false, WarIconChecker.RedImageChecker());
+            Assert.True(Browser.Driver.Url.Contains("/rp/buyTicket"));
 
         }
 
         [Test()]
-        [TestCase("molodoyVlad", "2012022Trayan")]
-        [TestCase("1", "2012022Trayan")]
-        [TestCase("molodoyVlad", "1")]
+        [TestCase("molodoyVlad", "molodoyVlad")]
+        [TestCase(" ", "2012022Trayan")]
+        [TestCase("molodoyVlad", "")]
         public void WrongLogin(string login, string password)
         {
             Pages.LoginPage.Login(password, login);
 
-            Assert.AreEqual(true, WarIconChecker.RedImageChecker());
+            Assert.IsFalse(Browser.Driver.Url.Contains("/rp/buyTicket"));
         }
     }
 }
