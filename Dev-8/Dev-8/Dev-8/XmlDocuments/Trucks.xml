@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Trucks>  
+  <Truck Brand="Iveco">
+  <model>Daily</model>
+  <quantity>3</quantity>
+  <price>45000</price>
+  </Truck>  
+  <Truck Brand="Volvo">
+  <model>FH12</model>
+  <quantity>17</quantity>
+  <price>34500</price>
+  </Truck>  
+  <Truck Brand="Dodge">
+  <model>Spritner</model>
+  <quantity>6</quantity>
+  <price>15200</price>
+  </Truck>      
+</Trucks>
